@@ -28,7 +28,7 @@ class LoginMobile extends StatelessWidget {
             child: Text('Sign In'),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => MainScreen()));
+                  MaterialPageRoute(builder: (context) => MainScreen(0)));
             },
           ),
         ],
