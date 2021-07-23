@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:siy/main_screen.dart';
+import 'package:siy/model/account.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -16,69 +17,60 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class LoginMobile extends StatelessWidget {
+class LoginMobile extends StatefulWidget {
+  LoginMobileState createState() => LoginMobileState();
+}
+
+class LoginMobileState extends State<LoginMobile> {
+  final unamecontroller = TextEditingController();
+  final passcontroller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Username(''),
-          Password(''),
+          Container(
+            padding: EdgeInsets.all(5),
+            child: TextField(
+              controller: unamecontroller,
+              decoration: InputDecoration(
+                hintText: 'kakek salto',
+                labelText: 'Username'
+              ),
+            )
+          ),
+          Container(
+            padding: EdgeInsets.all(5),
+            child: TextField(
+              controller: passcontroller,
+              obscureText: true,
+              decoration: InputDecoration(
+                hintText: '********',
+                labelText: 'Password'
+              ),
+            )
+          ),
           ElevatedButton(
             child: Text('Sign In'),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => MainScreen(0)));
+              var i = accounts.indexWhere((element) => element.username == unamecontroller.text);
+              if (i != -1 && passcontroller.text == accounts[i].password){
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MainScreen(i)));
+              } else {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: Text('Username/Password salah'),
+                    );
+                  }
+                );
+              }
             },
           ),
         ],
-      ),
-    );
-  }
-}
-
-class Username extends StatefulWidget {
-  final String username;
-
-  Username(this.username);
-  
-  @override
-  _UsernameState createState() => _UsernameState();
-}
-
-class _UsernameState extends State<Username> {
-  TextEditingController _controller = TextEditingController();
-
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: _controller,
-      decoration: InputDecoration(
-        hintText: '165xxxxx',
-        labelText: 'Your Username',
-      ),
-    );
-  }
-}
-
-class Password extends StatefulWidget {
-  final String password;
-
-  Password(this.password);
-  
-  @override
-  _PasswordState createState() => _PasswordState();
-}
-
-class _PasswordState extends State<Password> {
-  TextEditingController _controller = TextEditingController();
-
-  Widget build(BuildContext context) {
-    return TextField(
-      obscureText: true,
-      controller: _controller,
-      decoration: InputDecoration(
-        hintText: '*********',
-        labelText: 'Your Password',
       ),
     );
   }
