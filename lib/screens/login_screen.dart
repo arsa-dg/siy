@@ -55,6 +55,9 @@ class LoginMobileState extends State<LoginMobile> {
             ),
             ElevatedButton(
               child: Text('Sign In'),
+              style: ElevatedButton.styleFrom(
+                primary: Color(0xff0c9869),
+              ),
               onPressed: () {
                 var i = accounts.indexWhere((element) => element.username == unamecontroller.text);
                 if (i != -1 && passcontroller.text == accounts[i].password){
@@ -65,7 +68,7 @@ class LoginMobileState extends State<LoginMobile> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        content: Text('Username/Password salah'),
+                        content: Text('Username/Password salah. Cek account.dart'),
                       );
                     }
                   );

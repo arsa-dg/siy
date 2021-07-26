@@ -43,81 +43,99 @@ class MainMobile extends StatelessWidget {
           }),
       ),
       body: Center(
-        child: Column(
+        child: Stack(
           children: <Widget>[
             Container(
-              height: size.height * 0.1,
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  Container(
-                    height: size.height * 0.1,
-                    decoration: BoxDecoration(
-                      color: Color(0xff0c9869),
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(36),
-                        bottomRight: Radius.circular(36)
+              decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage('images/bg.jpeg'), fit: BoxFit.cover)
+              ),
+            ),
+            Column(
+              children: <Widget>[
+                Container(
+                  height: size.height * 0.1,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Container(
+                        height: size.height * 0.1,
+                        decoration: BoxDecoration(
+                          color: Color(0xff0c9869),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(36),
+                            bottomRight: Radius.circular(36)
+                          )
+                        ),
+                      ),
+                      Text(
+                        'Hai, '+accounts[i].name+'!', 
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 26
+                        ),
                       )
-                    ),
+                    ]
                   ),
-                  Text(
-                    'Hai, '+accounts[i].name+'!', 
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: size.height*0.1,left: 9, right: 9),
+                  height: size.height*0.07,
+                  width: size.width,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Color(0xff0c9869),
+                    borderRadius: BorderRadius.all(Radius.circular(4))
+                  ),
+                  child: Text(
+                    'Data Mahasiswa',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 26
+                      fontSize: 24
                     ),
-                  )
-                ]
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 100,left: 9, right: 9),
-              height: size.height*0.07,
-              width: size.width,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Color(0xff0c9869),
-                borderRadius: BorderRadius.all(Radius.circular(4))
-              ),
-              child: Text(
-                'Data Mahasiswa',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24
+                  ),
                 ),
-              ),
-            ),
-            Card(
-              margin: EdgeInsets.only(left: 10, right: 10),
-              elevation: 2,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Column(
+                Container(
+                  margin: EdgeInsets.only(left: 10, right: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    boxShadow: [
+                      BoxShadow( 
+                        color: Colors.grey, 
+                        blurRadius: 5, 
+                        offset: Offset(4,8))
+                    ]
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      Text('NIM', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                      Text('Nama', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                      Text('Fakultas', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                      Text('Program Studi', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                      Text('Dosen Wali', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                      Text('IP & IPK', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                      Column(
+                        children: <Widget>[
+                          Text('NIM', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                          Text('Nama', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                          Text('Fakultas', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                          Text('Program Studi', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                          Text('Dosen Wali', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                          Text('IP & IPK', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                        ],
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Text(accounts[i].nim, style: TextStyle(fontSize: 18)),
+                          Text(accounts[i].name, style: TextStyle(fontSize: 18)),
+                          Text(accounts[i].fakultas, style: TextStyle(fontSize: 18)),
+                          Text(accounts[i].prodi, style: TextStyle(fontSize: 18)),
+                          Text(accounts[i].doswal, style: TextStyle(fontSize: 18)),
+                          Text(accounts[i].ipk, style: TextStyle(fontSize: 18)),
+                        ],
+                      )
                     ],
                   ),
-                  Column(
-                    children: <Widget>[
-                      Text(accounts[i].nim, style: TextStyle(fontSize: 18)),
-                      Text(accounts[i].name, style: TextStyle(fontSize: 18)),
-                      Text(accounts[i].fakultas, style: TextStyle(fontSize: 18)),
-                      Text(accounts[i].prodi, style: TextStyle(fontSize: 18)),
-                      Text(accounts[i].doswal, style: TextStyle(fontSize: 18)),
-                      Text(accounts[i].ipk, style: TextStyle(fontSize: 18)),
-                    ],
-                  )
-                ],
-              ),
+                )
+              ],
             )
-          ],
-        )
+          ]
+        ) 
       )
     );
   }
