@@ -22,8 +22,8 @@ class LoginMobile extends StatefulWidget {
 }
 
 class LoginMobileState extends State<LoginMobile> {
-  final unamecontroller = TextEditingController();
-  final passcontroller = TextEditingController();
+  String _uname = '';
+  String _pass = '';
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,11 @@ class LoginMobileState extends State<LoginMobile> {
             Container(
               padding: EdgeInsets.all(5),
               child: TextField(
-                controller: unamecontroller,
+                onChanged: (String value) {
+                  setState(() {
+                    _uname = value;
+                  });
+                },
                 decoration: InputDecoration(
                   hintText: 'kakek salto',
                   labelText: 'Username'
@@ -45,7 +49,11 @@ class LoginMobileState extends State<LoginMobile> {
             Container(
               padding: EdgeInsets.all(5),
               child: TextField(
-                controller: passcontroller,
+                onChanged: (String value) {
+                  setState(() {
+                    _pass = value;
+                  });
+                },
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: '********',
@@ -59,8 +67,8 @@ class LoginMobileState extends State<LoginMobile> {
                 primary: Color(0xff0c9869),
               ),
               onPressed: () {
-                var i = accounts.indexWhere((element) => element.username == unamecontroller.text);
-                if (i != -1 && passcontroller.text == accounts[i].password){
+                var i = accounts.indexWhere((element) => element.username == _uname);
+                if (i != -1 && _pass == accounts[i].password){
                   Navigator.push(context,
                     MaterialPageRoute(builder: (context) => MainScreen(i)));
                 } else {
